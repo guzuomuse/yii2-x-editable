@@ -79,8 +79,20 @@ class XEditableColumn extends DataColumn
 
 		$this->view = \Yii::$app->getView();
 		XEditableAsset::register($this->view);
+###################################################################                
+                if($this->dataType=='date' || $this->dataType=='datetime'){//修改的源码，添加i18n，语言的支持---add i18n surpporting
+                    if(isset($this->editable['datepicker'])){                        
+                        $datepicker_json=  json_decode($this->editable['datepicker']);
+                        if(isset($datepicker_json->language)){
+                            XEditableAsset::register($this->view)->js[]='bootstrap-datepicker/js/locales/bootstrap-datepicker.'.$datepicker_json->language.'.js';
+                        }
+                    }
+                }
+########################################################################                
 		$this->editable = Json::encode($this->editable);
-		$this->view->registerJs('$(".editable").editable(' . $this->editable . ');');
+                //every gird hold his own editable
+                $this->view->registerJs("$('#".$this->grid->id." .editable').editable(".$this->editable.");");
+//		$this->view->registerJs('$(".editable").editable(' . $this->editable . ');');
 	}
 
 } 
