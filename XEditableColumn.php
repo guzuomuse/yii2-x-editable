@@ -84,7 +84,7 @@ class XEditableColumn extends DataColumn
                     if(isset($this->editable['datepicker'])){                        
                         $datepicker_json=  json_decode($this->editable['datepicker']);
                         if(isset($datepicker_json->language)){
-                            XEditableAsset::register($this->view)->js[]='bootstrap-datepicker/js/locales/bootstrap-datepicker.'.$datepicker_json->language.'.js';
+                            XEditableAsset::register($this->view)->js[]='bootstrap-'.$this->dataType.'picker/js/locales/bootstrap-datepicker.'.$datepicker_json->language.'.js';
                         }
                     }
                 }
