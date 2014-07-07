@@ -100,6 +100,15 @@ class XEditableDate extends XEditable
 	 */
 	public function registerAssets()
 	{
-		DatePickerAsset::register($this->view);
+###################################################################                
+//add i18n surpporting
+                if(isset($this->pluginOptions['datepicker'])){                        
+                    $datepicker_json=  json_decode($this->pluginOptions['datepicker']);
+                    if(isset($datepicker_json->language)){
+                        DatePickerAsset::register($this->view)->js[]='bootstrap-datepicker/js/locales/bootstrap-datepicker.'.$datepicker_json->language.'.js';
+                    }
+                }
+########################################################################                    
+//		DatePickerAsset::register($this->view);//because the bootstrap-datepicker.js file has benn included in bootstrap-editable.(min.) js，so this is no requirment
 	}
 }
