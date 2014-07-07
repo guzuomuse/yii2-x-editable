@@ -183,11 +183,7 @@ echo \mcms\xeditable\XEditableDate::widget([
 		'value' => date('Y-m-d',$model->created_at),
 		'format' => 'yyyy-mm-dd',
 		'viewformat' => 'dd/mm/yyyy',
-		'datepicker' => [
-			[
-				'weekStart' => 1
-			]
-		],
+		'datepicker'=>new \yii\web\JsExpression('{"language":"zh-CN" , "daysOfWeekDisabled":"[0,6]"}'),
 	]
 ]); ?>
 ```
@@ -206,11 +202,7 @@ echo \mcms\xeditable\XEditableDateTime::widget([
 		'value' => date('Y-m-d h:i',$model->created_at),
 		'format' => 'yyyy-mm-dd hh:ii',
 		'viewformat' => 'dd/mm/yyyy hh:ii',
-		'datepicker' => [
-			[
-				'weekStart' => 1
-			]
-		],
+		'datetimepicker'=>new \yii\web\JsExpression('{"language":"zh-CN"}'),
 	]
 ]); ?>
 ```
