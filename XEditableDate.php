@@ -11,7 +11,9 @@
 
 namespace mcms\xeditable;
 
-class XEditableDateTime extends XEditable
+use yii\helpers\Html;
+
+class XEditableDate extends XEditable
 {
 
 	/**
@@ -19,7 +21,7 @@ class XEditableDateTime extends XEditable
 	 * @var string
 	 * Type of input. select
 	 */
-	public $type = 'datetime';
+	public $type = 'date';
 
 	/**
 	 * @see XEditable
@@ -33,7 +35,7 @@ class XEditableDateTime extends XEditable
 	 * @var object
 	 * Configuration of datepicker. Full list of options: http://bootstrap-datepicker.readthedocs.org/en/latest/options.html
 	 */
-	public  $datepicker = '{ }';
+	public  $datepicker = '{ weekStart: 0, startView: 0, minViewMode: 0, autoclose: false }';
 
 	/**
 	 * @see XEditable
@@ -57,7 +59,7 @@ class XEditableDateTime extends XEditable
 	 * Format used for sending value to server. Also applied when converting date from data-value attribute.
 	 * Possible tokens are: d, dd, m, mm, yy, yyyy
 	 */
-	public  $format = 'yyyy-mm-dd hh:ii';
+	public  $format = 'yyyy-mm-dd';
 
 	/**
 	 * @see XEditable
@@ -69,10 +71,9 @@ class XEditableDateTime extends XEditable
 
 	/**
 	 * @see XEditable
-	 * @var string
-	 * HTML template of input. Normally you should not change it.
+	 * @var array
 	 */
-	public  $tpl = '<div></div>';
+	public  $input = [];
 
 	/**
 	 * @see Xeditable
@@ -101,14 +102,14 @@ class XEditableDateTime extends XEditable
 	{
 ###################################################################                
 //add i18n surpporting
-                if(isset($this->pluginOptions['datetimepicker'])){                        
-                    $datetimepicker_json=  json_decode($this->pluginOptions['datetimepicker']);
-                    if(isset($datetimepicker_json->language)){
-                        EditableAsset::register($this->view)->js[]='bootstrap-datepicker/js/locales/bootstrap-datetimepicker.'.$datetimepicker_json->language.'.js';
+                if(isset($this->pluginOptions['datepicker'])){                        
+                    $datepicker_json=  json_decode($this->pluginOptions['datepicker']);
+                    if(isset($datepicker_json->language)){
+                        XEditableAsset::register($this->view)->js[]='bootstrap-datepicker/js/locales/bootstrap-datepicker.'.$datepicker_json->language.'.js';
+//                        DatePickerAsset::register($this->view)->js[]='bootstrap-datepicker/js/locales/bootstrap-datepicker.'.$datepicker_json->language.'.js';
                     }
                 }
-########################################################################               
-//		DateTimePickerAsset::register($this->view);//because the bootstrap-datetimepicker.js file has benn included in bootstrap-editable.(min.) js，so this is no requirment
+########################################################################                    
+//		DatePickerAsset::register($this->view);//because the bootstrap-datepicker.js file has benn included in bootstrap-editable.(min.) js，so this is no requirment
 	}
-
 }
